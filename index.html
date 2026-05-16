@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Leather & Goods Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --cognac: #8B4513;
+  --dark-leather: #3E1A0B;
+  --cream: #F5EFE0;
+  --warm-white: #FAF7F2;
+  --gold: #C49A3C;
+  --gold-light: #E8C87A;
+  --charcoal: #1C1C1C;
+  --mid-brown: #6B3320;
+  --light-tan: #D4A574;
+  --shadow: rgba(62,26,11,0.18);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Montserrat',sans-serif;
+  background:var(--warm-white);
+  color:var(--charcoal);
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  background:rgba(250,247,242,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(196,154,60,0.25);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:72px;
+  transition:all .3s ease;
+}
+nav.scrolled{
+  background:rgba(30,12,4,0.95);
+  border-bottom-color:rgba(196,154,60,0.4);
+}
+.nav-logo img{height:40px;object-fit:contain;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{
+  font-size:12px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--dark-leather);font-weight:600;
+  text-decoration:none;position:relative;
+  transition:color .3s;
+}
+nav.scrolled .nav-links a{color:var(--cream);}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;
+  background:var(--gold);transition:width .3s;
+}
+.nav-links a:hover::after{width:100%;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{
+  background:var(--cognac);color:#fff;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  padding:10px 24px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;
+  font-weight:600;transition:all .3s;
+}
+.nav-cta:hover{background:var(--gold);}
+
+/* ── HERO ── */
+.hero{
+  height:100vh;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(160deg,rgba(30,12,4,0.72) 0%,rgba(62,26,11,0.45) 50%,rgba(30,12,4,0.8) 100%),
+    url('https://leathergoodsco.com/wp-content/themes/my_theme_child/images/banner1.jpg') center/cover no-repeat;
+  transform:scale(1.05);
+  animation:heroZoom 12s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{
+  from{transform:scale(1.05);}
+  to{transform:scale(1.12);}
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  color:#fff;padding:0 24px;
+  animation:fadeUp .9s ease both;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.hero-eyebrow{
+  font-size:11px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold-light);font-weight:500;margin-bottom:24px;
+  display:flex;align-items:center;gap:16px;justify-content:center;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'';display:block;width:40px;height:1px;background:var(--gold);
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,8vw,108px);font-weight:300;
+  line-height:1.0;letter-spacing:-1px;margin-bottom:8px;
+}
+.hero h1 em{font-style:italic;color:var(--gold-light);}
+.hero-sub{
+  font-size:13px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);margin:28px 0 48px;font-weight:300;
+}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{
+  background:var(--gold);color:var(--dark-leather);
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+  padding:16px 40px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;
+  transition:all .3s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-outline{
+  background:transparent;color:#fff;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;
+  padding:15px 40px;border:1px solid rgba(255,255,255,0.5);cursor:pointer;
+  font-family:'Montserrat',sans-serif;transition:all .3s;
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,0.5);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  animation:bounce 2s infinite;
+}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--gold));}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
+/* ── STRIP ── */
+.gold-strip{
+  background:var(--dark-leather);
+  display:flex;justify-content:center;align-items:center;gap:48px;
+  padding:20px 48px;flex-wrap:wrap;
+}
+.strip-item{
+  display:flex;align-items:center;gap:12px;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cream);font-weight:500;
+}
+.strip-icon{font-size:18px;}
+
+/* ── SECTION COMMONS ── */
+.section-label{
+  font-size:10px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:16px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,5vw,64px);font-weight:300;line-height:1.1;
+  color:var(--dark-leather);margin-bottom:24px;
+}
+.section-title em{font-style:italic;color:var(--cognac);}
+
+/* ── COLLECTION ── */
+.collection{padding:100px 48px;background:var(--warm-white);}
+.collection-header{text-align:center;margin-bottom:64px;}
+.collection-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;max-width:1280px;margin:0 auto;
+}
+.col-card{
+  position:relative;overflow:hidden;cursor:pointer;
+  background:#111;
+}
+.col-card img{
+  width:100%;height:380px;object-fit:cover;
+  transition:transform .6s ease,filter .6s ease;
+  filter:brightness(0.85);
+  display:block;
+}
+.col-card:hover img{transform:scale(1.08);filter:brightness(0.6);}
+.col-card-info{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(30,12,4,0.92) 0%,transparent 100%);
+  padding:40px 28px 28px;
+  transform:translateY(20px);opacity:0;
+  transition:all .4s ease;
+}
+.col-card:hover .col-card-info{transform:translateY(0);opacity:1;}
+.col-card-label{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold-light);font-weight:600;margin-bottom:8px;
+}
+.col-card-title{
+  font-family:'Cormorant Garamond',serif;font-size:28px;
+  color:#fff;font-weight:400;margin-bottom:16px;
+}
+.col-card-link{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:gap .3s;
+}
+.col-card-link:hover{gap:14px;}
+.col-card.featured{grid-column:span 2;}
+.col-card.featured img{height:480px;}
+
+/* ── ABOUT SPLIT ── */
+.about{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:600px;
+}
+.about-image{
+  position:relative;overflow:hidden;
+}
+.about-image img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .8s ease;
+}
+.about:hover .about-image img{transform:scale(1.04);}
+.about-image::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(196,154,60,0.15),transparent);
+}
+.about-content{
+  background:var(--dark-leather);
+  padding:80px 72px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.about-content .section-title{color:var(--cream);}
+.about-body{
+  font-size:15px;line-height:1.9;color:rgba(245,239,224,0.75);
+  margin-bottom:40px;font-weight:300;
+}
+.about-stats{
+  display:flex;gap:48px;
+}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;font-size:52px;
+  color:var(--gold);font-weight:300;line-height:1;
+}
+.stat-label{
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--cream);opacity:0.6;margin-top:4px;
+}
+
+/* ── GLOVES ── */
+.gloves{
+  padding:100px 48px;
+  background:linear-gradient(135deg,var(--dark-leather) 0%,var(--mid-brown) 100%);
+  position:relative;overflow:hidden;
+}
+.gloves::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:rgba(196,154,60,0.07);
+}
+.gloves-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.gloves-content .section-title{color:var(--cream);}
+.gloves-content .section-label{color:var(--gold-light);}
+.gloves-body{
+  font-size:15px;line-height:1.9;color:rgba(245,239,224,0.7);
+  margin-bottom:40px;font-weight:300;
+}
+.gloves-features{list-style:none;margin-bottom:40px;}
+.gloves-features li{
+  padding:12px 0;border-bottom:1px solid rgba(196,154,60,0.2);
+  color:var(--cream);font-size:13px;letter-spacing:0.5px;
+  display:flex;align-items:center;gap:12px;
+}
+.gloves-features li::before{content:'✦';color:var(--gold);font-size:10px;}
+.gloves-img-wrap{position:relative;}
+.gloves-img-wrap img{
+  width:100%;border-radius:0;
+  box-shadow:24px 24px 0 rgba(196,154,60,0.25);
+}
+.gloves-badge{
+  position:absolute;bottom:-24px;right:-24px;
+  width:100px;height:100px;border-radius:50%;
+  background:var(--gold);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--dark-leather);font-weight:700;text-align:center;line-height:1.3;
+}
+
+/* ── BANNER CTA ── */
+.banner-cta{
+  position:relative;height:440px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.banner-cta-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right,rgba(30,12,4,0.88) 0%,rgba(62,26,11,0.6) 60%,rgba(30,12,4,0.5) 100%),
+    url('https://leathergoodsco.com/wp-content/themes/my_theme_child/images/appoinment-banner.jpg') center/cover;
+}
+.banner-cta-content{
+  position:relative;z-index:2;
+  max-width:700px;text-align:center;padding:0 24px;
+  color:#fff;
+}
+.banner-cta h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,5vw,64px);font-weight:300;line-height:1.1;margin-bottom:16px;
+}
+.banner-cta h2 em{font-style:italic;color:var(--gold-light);}
+.banner-cta p{
+  font-size:13px;letter-spacing:0.5px;line-height:1.8;
+  color:rgba(255,255,255,0.7);margin-bottom:36px;
+}
+
+/* ── CONTACT ── */
+.contact{padding:100px 48px;background:var(--cream);}
+.contact-inner{max-width:1000px;margin:0 auto;text-align:center;}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:32px;margin-top:64px;
+}
+.contact-card{
+  background:var(--warm-white);padding:48px 32px;
+  border-top:3px solid var(--gold);
+  transition:transform .3s,box-shadow .3s;
+}
+.contact-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px var(--shadow);}
+.contact-icon{font-size:32px;margin-bottom:20px;}
+.contact-card h3{
+  font-family:'Cormorant Garamond',serif;font-size:22px;
+  color:var(--dark-leather);margin-bottom:12px;
+}
+.contact-card p,.contact-card a{
+  font-size:14px;color:#666;line-height:1.8;text-decoration:none;
+}
+.contact-card a:hover{color:var(--cognac);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--charcoal);
+  padding:60px 48px 28px;
+}
+.footer-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;
+  padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.footer-brand img{height:36px;margin-bottom:20px;filter:brightness(0) invert(1);}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.8;}
+.footer-col h4{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col ul li a{
+  font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;
+  transition:color .2s;
+}
+.footer-col ul li a:hover{color:var(--gold-light);}
+.footer-social{display:flex;gap:12px;margin-top:24px;}
+.social-btn{
+  width:40px;height:40px;border:1px solid rgba(255,255,255,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;cursor:pointer;transition:all .3s;text-decoration:none;color:#fff;
+}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);}
+.footer-bottom{
+  max-width:1280px;margin:0 auto;
+  padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:12px;
+}
+
+/* ── CHATBOT ── */
+#chat-fab{
+  position:fixed;bottom:32px;right:32px;z-index:9999;
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cognac),var(--gold));
+  border:none;cursor:pointer;
+  box-shadow:0 8px 32px rgba(139,69,19,0.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;transition:all .3s;
+  animation:pulse 2.5s infinite;
+}
+#chat-fab:hover{transform:scale(1.1);}
+@keyframes pulse{
+  0%,100%{box-shadow:0 8px 32px rgba(139,69,19,0.5);}
+  50%{box-shadow:0 8px 48px rgba(196,154,60,0.7);}
+}
+.chat-badge{
+  position:absolute;top:-4px;right:-4px;
+  width:20px;height:20px;border-radius:50%;background:#e74c3c;
+  font-size:11px;color:#fff;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid #fff;
+}
+
+#chat-window{
+  position:fixed;bottom:112px;right:32px;z-index:9998;
+  width:380px;height:560px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 24px 64px rgba(30,12,4,0.25);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transform:scale(0.85) translateY(20px);
+  opacity:0;pointer-events:none;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  transform-origin:bottom right;
+}
+#chat-window.open{
+  transform:scale(1) translateY(0);
+  opacity:1;pointer-events:all;
+}
+
+.chat-header{
+  background:linear-gradient(135deg,var(--dark-leather),var(--mid-brown));
+  padding:20px 20px 16px;
+  display:flex;align-items:center;gap:14px;
+  flex-shrink:0;
+}
+.chat-avatar{
+  width:44px;height:44px;border-radius:50%;overflow:hidden;
+  border:2px solid var(--gold);flex-shrink:0;
+}
+.chat-avatar img{width:100%;height:100%;object-fit:cover;}
+.chat-header-info h3{
+  font-family:'Cormorant Garamond',serif;font-size:18px;
+  color:#fff;font-weight:400;
+}
+.chat-header-info p{font-size:11px;color:var(--gold-light);letter-spacing:1px;}
+.online-dot{
+  width:8px;height:8px;border-radius:50%;background:#2ecc71;
+  display:inline-block;margin-right:4px;
+  animation:blink 1.4s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.4;}  }
+.chat-close{
+  margin-left:auto;background:none;border:none;
+  color:rgba(255,255,255,0.6);font-size:22px;cursor:pointer;
+  transition:color .2s;line-height:1;
+}
+.chat-close:hover{color:#fff;}
+
+.chat-messages{
+  flex:1;overflow-y:auto;padding:20px;
+  display:flex;flex-direction:column;gap:14px;
+  background:var(--warm-white);
+}
+.chat-messages::-webkit-scrollbar{width:4px;}
+.chat-messages::-webkit-scrollbar-track{background:transparent;}
+.chat-messages::-webkit-scrollbar-thumb{background:var(--light-tan);border-radius:2px;}
+
+.msg{max-width:82%;display:flex;flex-direction:column;gap:4px;}
+.msg.bot{align-self:flex-start;}
+.msg.user{align-self:flex-end;}
+.msg-bubble{
+  padding:12px 16px;border-radius:16px;
+  font-size:13.5px;line-height:1.65;
+}
+.msg.bot .msg-bubble{
+  background:#fff;color:var(--charcoal);
+  border-radius:4px 16px 16px 16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+.msg.user .msg-bubble{
+  background:linear-gradient(135deg,var(--cognac),var(--mid-brown));
+  color:#fff;border-radius:16px 4px 16px 16px;
+}
+.msg-time{font-size:10px;color:#aaa;padding:0 4px;}
+.msg.user .msg-time{text-align:right;}
+
+.typing{align-self:flex-start;}
+.typing-dots{
+  display:flex;gap:5px;padding:14px 18px;
+  background:#fff;border-radius:4px 16px 16px 16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;background:var(--light-tan);
+  animation:dotBounce 1.2s infinite;
+}
+.dot:nth-child(2){animation-delay:.2s;}
+.dot:nth-child(3){animation-delay:.4s;}
+@keyframes dotBounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-8px);}}
+
+.quick-replies{
+  padding:12px 16px 0;
+  display:flex;gap:8px;flex-wrap:wrap;
+}
+.qr-btn{
+  background:transparent;border:1px solid var(--cognac);color:var(--cognac);
+  font-size:11px;padding:6px 14px;border-radius:20px;cursor:pointer;
+  font-family:'Montserrat',sans-serif;transition:all .2s;
+  white-space:nowrap;
+}
+.qr-btn:hover{background:var(--cognac);color:#fff;}
+
+.chat-input-wrap{
+  padding:16px;border-top:1px solid #f0e8dc;
+  display:flex;gap:10px;background:#fff;flex-shrink:0;
+}
+#chat-input{
+  flex:1;border:1px solid #e8ddd0;border-radius:24px;
+  padding:10px 18px;font-size:13.5px;font-family:'Montserrat',sans-serif;
+  outline:none;transition:border-color .2s;background:var(--warm-white);
+}
+#chat-input:focus{border-color:var(--cognac);}
+#chat-send{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cognac),var(--gold));
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:#fff;transition:transform .2s;flex-shrink:0;
+}
+#chat-send:hover{transform:scale(1.08);}
+
+/* ── WHATSAPP ── */
+#wa-btn{
+  position:fixed;bottom:32px;left:32px;z-index:9999;
+  background:#25D366;color:#fff;border:none;border-radius:50px;
+  padding:14px 22px;cursor:pointer;
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;font-weight:600;font-family:'Montserrat',sans-serif;
+  box-shadow:0 8px 24px rgba(37,211,102,0.4);
+  text-decoration:none;transition:all .3s;
+}
+#wa-btn:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,0.5);}
+
+/* ── ANIMATIONS ── */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .collection-grid{grid-template-columns:1fr 1fr;}
+  .col-card.featured{grid-column:span 1;}
+  .col-card.featured img{height:300px;}
+  .about{grid-template-columns:1fr;}
+  .about-image{height:350px;}
+  .gloves-inner{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+  #chat-window{width:calc(100vw - 32px);right:16px;bottom:100px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/logo.png" alt="The Leather & Goods Company"/>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#gloves">Gloves</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openChat()">Chat With Us</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Est. India &nbsp;·&nbsp; Crafted Excellence</div>
+    <h1>The Leather &<br/><em>Goods Company</em></h1>
+    <p class="hero-sub">Autumn Winter 2025 — Elevated Looks</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">Explore Collection</button>
+      <button class="btn-outline" onclick="openChat()">Get a Quote</button>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- GOLD STRIP -->
+<div class="gold-strip">
+  <div class="strip-item"><span class="strip-icon">✦</span> Premium Genuine Leather</div>
+  <div class="strip-item"><span class="strip-icon">✦</span> B2B Wholesale Supplier</div>
+  <div class="strip-item"><span class="strip-icon">✦</span> Industrial Grade Gloves</div>
+  <div class="strip-item"><span class="strip-icon">✦</span> Custom Orders Welcome</div>
+</div>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection">
+  <div class="collection-header reveal">
+    <div class="section-label">Our Products</div>
+    <h2 class="section-title">Crafted for Every <em>Purpose</em></h2>
+  </div>
+  <div class="collection-grid">
+
+    <div class="col-card featured reveal">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/banner-sky.jpg" alt="Ladies Bags"/>
+      <div class="col-card-info">
+        <div class="col-card-label">Leather</div>
+        <div class="col-card-title">Ladies Collection</div>
+        <a class="col-card-link" href="https://leathergoodsco.com/category/ladies-bag/" target="_blank">View Range →</a>
+      </div>
+    </div>
+
+    <div class="col-card reveal" style="transition-delay:.1s">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/bag2.jpg" alt="Backpack"/>
+      <div class="col-card-info">
+        <div class="col-card-label">Leather</div>
+        <div class="col-card-title">Backpacks</div>
+        <a class="col-card-link" href="https://leathergoodsco.com/category/backpack/" target="_blank">View Range →</a>
+      </div>
+    </div>
+
+    <div class="col-card reveal" style="transition-delay:.15s">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/bag3.jpg" alt="Travel Bag"/>
+      <div class="col-card-info">
+        <div class="col-card-label">Leather</div>
+        <div class="col-card-title">Travel Bags</div>
+        <a class="col-card-link" href="https://leathergoodsco.com/category/travel-bag/" target="_blank">View Range →</a>
+      </div>
+    </div>
+
+    <div class="col-card reveal" style="transition-delay:.2s">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/charger-bag.jpg" alt="Laptop Bag"/>
+      <div class="col-card-info">
+        <div class="col-card-label">Leather</div>
+        <div class="col-card-title">Laptop Bags</div>
+        <a class="col-card-link" href="https://leathergoodsco.com/category/laptop-bag/" target="_blank">View Range →</a>
+      </div>
+    </div>
+
+    <div class="col-card reveal" style="transition-delay:.25s">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/leather-bag.jpg" alt="Range of Bags"/>
+      <div class="col-card-info">
+        <div class="col-card-label">Leather</div>
+        <div class="col-card-title">Full Range</div>
+        <a class="col-card-link" href="https://leathergoodsco.com/category/range-of-bags/" target="_blank">View Range →</a>
+      </div>
+    </div>
+
+    <div class="col-card reveal" style="transition-delay:.3s">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/leather-bag2.jpg" alt="Leather Goods"/>
+      <div class="col-card-info">
+        <div class="col-card-label">Leather</div>
+        <div class="col-card-title">Accessories</div>
+        <a class="col-card-link" href="https://leathergoodsco.com/" target="_blank">View Range →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image">
+    <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/bag1.jpg" alt="About Us"/>
+  </div>
+  <div class="about-content">
+    <div class="section-label">Our Story</div>
+    <h2 class="section-title">Heritage Meets <em>Craft</em></h2>
+    <p class="about-body">
+      The Leather & Goods Company is a premier Indian manufacturer and B2B supplier of high-quality leather products. From elegant ladies' bags and sturdy backpacks to precision-crafted industrial gloves — every piece is built to endure, impress, and perform.
+    </p>
+    <p class="about-body" style="margin-top:-24px;margin-bottom:40px;">
+      We supply to retailers, distributors, and industrial buyers across India and beyond. Our commitment to quality leather, honest pricing, and reliable delivery makes us the preferred partner for serious businesses.
+    </p>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Products</div>
+      </div>
+      <div>
+        <div class="stat-num">B2B</div>
+        <div class="stat-label">Wholesale Ready</div>
+      </div>
+      <div>
+        <div class="stat-num">PAN</div>
+        <div class="stat-label">India Delivery</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOVES -->
+<section class="gloves" id="gloves">
+  <div class="gloves-inner">
+    <div class="gloves-content reveal">
+      <div class="section-label">Industrial Division</div>
+      <h2 class="section-title">Industrial <em>Hand Gloves</em></h2>
+      <p class="gloves-body">
+        Our industrial glove range is trusted by factories, workshops, and safety-conscious businesses across India. Built from premium leather with reinforced stitching — protection that does not compromise on comfort.
+      </p>
+      <ul class="gloves-features">
+        <li>Heavy-duty genuine leather construction</li>
+        <li>Reinforced palm and finger zones</li>
+        <li>Heat-resistant variants available</li>
+        <li>Bulk B2B orders welcomed</li>
+        <li>Custom branding available</li>
+      </ul>
+      <button class="btn-primary" onclick="openChat()">Request Wholesale Quote</button>
+    </div>
+    <div class="gloves-img-wrap reveal" style="transition-delay:.2s">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/charger-bag-2.jpg" alt="Industrial Gloves"/>
+      <div class="gloves-badge">Industrial<br/>Grade</div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER CTA -->
+<div class="banner-cta">
+  <div class="banner-cta-bg"></div>
+  <div class="banner-cta-content reveal">
+    <h2>Ready to Place a <em>Bulk Order?</em></h2>
+    <p>We work with retailers, distributors, and industrial buyers. Get custom pricing, branding options, and dedicated account support when you partner with us.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="openChat()">Chat & Get a Quote</button>
+      <a href="https://api.whatsapp.com/send?phone=919007727148" target="_blank" class="btn-outline" style="display:inline-flex;align-items:center;gap:8px;">📱 WhatsApp Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Let's Talk <em>Business</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-icon">📞</div>
+        <h3>Call Us</h3>
+        <p><a href="tel:9007727148">9007727148</a> — Bags & Wallets<br/><a href="tel:9432673517">9432673517</a> — Gloves Division</p>
+      </div>
+      <div class="contact-card reveal" style="transition-delay:.1s">
+        <div class="contact-icon">✉️</div>
+        <h3>Email</h3>
+        <p><a href="mailto:info@leathergoodsco.com">info@leathergoodsco.com</a><br/>We reply within 24 hours</p>
+      </div>
+      <div class="contact-card reveal" style="transition-delay:.2s">
+        <div class="contact-icon">💬</div>
+        <h3>WhatsApp</h3>
+        <p><a href="https://api.whatsapp.com/send?phone=919007727148" target="_blank">+91 90077 27148</a><br/>Quick quotes on WhatsApp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/logo.png" alt="Logo"/>
+      <p>India's trusted leather goods manufacturer and B2B supplier — bags, wallets, industrial gloves, and more.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/share/178J1Qdzhh/" class="social-btn" target="_blank">f</a>
+        <a href="https://www.instagram.com/theleathergoodsco/" class="social-btn" target="_blank">📷</a>
+        <a href="https://api.whatsapp.com/send?phone=919007727148" class="social-btn" target="_blank">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="https://leathergoodsco.com/category/backpack/">Backpacks</a></li>
+        <li><a href="https://leathergoodsco.com/category/ladies-bag/">Ladies Bags</a></li>
+        <li><a href="https://leathergoodsco.com/category/laptop-bag/">Laptop Bags</a></li>
+        <li><a href="https://leathergoodsco.com/category/travel-bag/">Travel Bags</a></li>
+        <li><a href="https://leathergoodsco.com/product_cat/indistrial-hand-gloves/">Industrial Gloves</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="https://leathergoodsco.com/about-us">About Us</a></li>
+        <li><a href="https://leathergoodsco.com/contact">Contact</a></li>
+        <li><a href="#" onclick="openChat()">Get a Quote</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:9007727148">📞 9007727148</a></li>
+        <li><a href="tel:9432673517">📞 9432673517</a></li>
+        <li><a href="mailto:info@leathergoodsco.com">✉ Email Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 The Leather & Goods Company. All rights reserved.</span>
+    <span>Crafted with care · Made in India</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://api.whatsapp.com/send?phone=919007727148" target="_blank" id="wa-btn">
+  💬 WhatsApp Us
+</a>
+
+<!-- CHAT FAB -->
+<button id="chat-fab" onclick="toggleChat()">
+  🧳
+  <div class="chat-badge" id="chat-badge">1</div>
+</button>
+
+<!-- CHAT WINDOW -->
+<div id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">
+      <img src="https://leathergoodsco.com/wp-content/themes/my_theme_child/images/logo.png" alt="LGC" style="background:#3E1A0B;padding:4px;"/>
+    </div>
+    <div class="chat-header-info">
+      <h3>Leather & Goods Co.</h3>
+      <p><span class="online-dot"></span>AI Assistant · Online</p>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-messages" id="chat-msgs"></div>
+  <div id="quick-replies-area"></div>
+  <div class="chat-input-wrap">
+    <input type="text" id="chat-input" placeholder="Ask about products, pricing, orders…" onkeydown="if(event.key==='Enter')sendMsg()"/>
+    <button id="chat-send" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+// ── NAVBAR SCROLL ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// ── REVEAL ON SCROLL ──
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ── CHAT STATE ──
+let chatOpen=false;
+let conversationHistory=[];
+const systemPrompt=`You are a friendly, knowledgeable sales and support assistant for The Leather & Goods Company (leathergoodsco.com), a premium Indian leather goods manufacturer and B2B supplier.
+
+Company Info:
+- Products: Leather backpacks, ladies bags, laptop bags, travel bags, range of bags, industrial hand gloves
+- Phone (Bags & Wallets): 9007727148
+- Phone (Gloves): 9432673517
+- Email: info@leathergoodsco.com
+- WhatsApp: +91 9007727148
+- Social: Facebook & Instagram @theleathergoodsco
+- B2B wholesale supplier — bulk orders, custom branding available
+- Located in India, PAN India delivery
+
+Your role:
+- Help visitors with product queries, pricing inquiries, bulk/wholesale quotes, and order info
+- Be warm, professional, and concise (2-3 sentences max per reply usually)
+- For pricing, say prices depend on quantity and customization — invite them to share requirements
+- For specific technical specs, invite them to call or WhatsApp
+- Always end responses with a helpful next step or question to keep engagement going
+- Use occasional leather/craft-related warmth in your tone`;
+
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById('chat-window').classList.toggle('open',chatOpen);
+  document.getElementById('chat-badge').style.display='none';
+  if(chatOpen && document.getElementById('chat-msgs').children.length===0){
+    initChat();
+  }
+}
+function openChat(){
+  if(!chatOpen){toggleChat();}
+}
+
+function initChat(){
+  const greet=[
+    {role:'bot',text:"👋 Welcome to <strong>The Leather & Goods Company!</strong> I'm your AI assistant — here to help with product info, bulk pricing, and order enquiries."},
+    {role:'bot',text:"What can I help you with today?"}
+  ];
+  greet.forEach((m,i)=>setTimeout(()=>appendMsg(m.role,m.text),i*600));
+  setTimeout(()=>showQuickReplies(['🎒 Bags & Backpacks','🧤 Industrial Gloves','💰 Bulk Pricing','📦 Custom Orders']),1400);
+}
+
+function showQuickReplies(options){
+  const area=document.getElementById('quick-replies-area');
+  area.innerHTML='';
+  const wrap=document.createElement('div');
+  wrap.className='quick-replies';
+  options.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='qr-btn';b.textContent=o;
+    b.onclick=()=>{area.innerHTML='';sendMsg(o);};
+    wrap.appendChild(b);
+  });
+  area.appendChild(wrap);
+}
+
+function appendMsg(role,text,animate=true){
+  const msgs=document.getElementById('chat-msgs');
+  const div=document.createElement('div');
+  div.className=`msg ${role}`;
+  const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  div.innerHTML=`<div class="msg-bubble">${text}</div><div class="msg-time">${now}</div>`;
+  if(animate){div.style.opacity='0';div.style.transform='translateY(12px)';}
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+  if(animate){requestAnimationFrame(()=>{div.style.transition='all .3s ease';div.style.opacity='1';div.style.transform='translateY(0)';});}
+}
+
+function showTyping(){
+  const msgs=document.getElementById('chat-msgs');
+  const div=document.createElement('div');
+  div.className='typing';div.id='typing-indicator';
+  div.innerHTML='<div class="typing-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function hideTyping(){
+  const t=document.getElementById('typing-indicator');
+  if(t)t.remove();
+}
+
+async function sendMsg(overrideText){
+  const input=document.getElementById('chat-input');
+  const text=overrideText||input.value.trim();
+  if(!text)return;
+  input.value='';
+  document.getElementById('quick-replies-area').innerHTML='';
+  appendMsg('user',text);
+  conversationHistory.push({role:'user',content:text});
+  showTyping();
+
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:systemPrompt,
+        messages:conversationHistory
+      })
+    });
+    const data=await resp.json();
+    hideTyping();
+    const reply=data.content?.[0]?.text||"I'm sorry, I didn't get that. Please try again!";
+    conversationHistory.push({role:'assistant',content:reply});
+    appendMsg('bot',reply.replace(/\n/g,'<br/>'));
+
+    // Dynamic follow-up quick replies based on context
+    const low=text.toLowerCase();
+    if(low.includes('glove')||low.includes('industrial')){
+      showQuickReplies(['📞 Call Gloves Division','💬 WhatsApp Quote','📦 Bulk Order Info']);
+    } else if(low.includes('bag')||low.includes('backpack')||low.includes('ladies')||low.includes('laptop')||low.includes('travel')){
+      showQuickReplies(['💰 Get Pricing','🎨 Custom Branding','📞 Call Now','💬 WhatsApp']);
+    } else if(low.includes('price')||low.includes('cost')||low.includes('rate')||low.includes('bulk')||low.includes('wholesale')){
+      showQuickReplies(['📧 Email Requirements','💬 WhatsApp Quote','📞 Call Sales Team']);
+    }
+  } catch(err){
+    hideTyping();
+    appendMsg('bot','Sorry, I had trouble connecting. Please call us at <strong>9007727148</strong> or WhatsApp us directly!');
+  }
+}
+</script>
+</body>
+</html>
